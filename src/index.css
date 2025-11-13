@@ -58,6 +58,11 @@ html[data-theme="dark"] {
   }
 }
 
+body {
+  overflow-x: hidden;
+  height: 100dvh;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -85,4 +90,38 @@ textarea {
 
 input::placeholder {
   color: var(--muted);
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+  width: 85%;
+  padding: 0 20px;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.filter:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 4px 25px rgba(var(--accent-rgb), 0.25);
+  transform: translateY(-1px);
+}
+
+.filter input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.filter input::placeholder {
+  color: rgba(var(--text-rgb), 0.5);
 }

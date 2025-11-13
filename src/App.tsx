@@ -3,13 +3,14 @@ import { layouts } from "./layouts/index";
 import { components } from "./components/index";
 function App() {
   return (
-    <div className="container">
+    <>
       <layouts.Header />
-      <div className="app-content">
-        <h1>Welcome to the Echo App</h1>
+      <main className="app-content">
+        <h1 style={{ marginBottom: "30px" }}>Welcome to the Echo App</h1>
+        <components.Filter />
         <components.MaterialCard />
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
 

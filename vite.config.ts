@@ -9,4 +9,13 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  server: {
+    proxy: {
+      "/optimade": {
+        target: "https://optimade.materialscloud.org",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/optimade/, ""),
+      },
+    },
+  },
 });

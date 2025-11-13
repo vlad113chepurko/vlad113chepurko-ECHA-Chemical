@@ -7,9 +7,11 @@ export default function Header() {
   const { useThemeStore } = stores;
   const { theme } = useThemeStore();
   const { onToggleTheme } = hooks.useTheme();
+
   function handleToggleTheme() {
     onToggleTheme();
   }
+
   return (
     <header className="header">
       <img
@@ -18,28 +20,7 @@ export default function Header() {
         alt="logo"
       />
       <div className="right-section">
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <button className="search-button" type="button">
-            <img width={25} height={25} src="/icons/search.svg" alt="search" />
-          </button>
-          <motion.input
-            className="search-bar"
-            type="text"
-            placeholder="Search..."
-          />
-        </div>
-        <button
-          className="switch-button"
-          type="button"
-        >
+        <button className="switch-button" type="button">
           <motion.img
             animate={{ rotate: theme === "light" ? 0 : 360 }}
             width={30}

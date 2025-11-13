@@ -1,16 +1,19 @@
 import "./MaterialCard.css";
+import Pagination from "../pagination/Pagination";
 import { hooks } from "@/hooks/index";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { components } from "@/components/index";
+import { stores } from "@/store/index";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 3;
 
 export default function MaterialCard() {
-  const { getSubstance } = hooks.useGetSubstance();
+  const { filteredData } = stores.useFilterStore();
+  const { getAllSubstances } = hooks.useGetAllSubstances();
   const { data, isLoading, error } = useQuery({
     queryKey: ["substance"],
-    queryFn: () => getSubstance(),
+    queryFn: () => getAllSubstances(),
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +21,13 @@ export default function MaterialCard() {
   if (isLoading) return <components.Loading />;
   if (error) return <p>Error fetching data</p>;
 
-  const items = data?.data || [];
+  const items =
+    filteredData && filteredData.length > 0 ? filteredData : data?.data || [];
+
+  if (!items.length) {
+    return <p style={{ textAlign: "center" }}>No results found 😔</p>;
+  }
+
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentItems = items.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -60,36 +69,11 @@ export default function MaterialCard() {
         ))}
       </div>
 
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            style={{
-              fontWeight: currentPage === i + 1 ? "bold" : "normal",
-              margin: "0 5px",
-            }}
-          >
-            {i + 1}
-          </button>
-        ))}
-
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
