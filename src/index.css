@@ -43,6 +43,7 @@ html[data-theme="light"] {
   input,
   textarea,
   button {
+    color: var(--bg-dark);
     border: 1px solid var(--border-light);
   }
 }

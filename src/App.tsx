@@ -1,11 +1,14 @@
 import "./App.css";
-import Header from "@/layouts/Header";
-
+import { layouts } from "./layouts/index";
+import { components } from "./components/index";
 function App() {
   return (
     <div className="container">
-      <Header />
-      <h1>Welcome to the Echo App</h1>
+      <layouts.Header />
+      <div className="app-content">
+        <h1>Welcome to the Echo App</h1>
+        <components.MaterialCard />
+      </div>
     </div>
   );
 }

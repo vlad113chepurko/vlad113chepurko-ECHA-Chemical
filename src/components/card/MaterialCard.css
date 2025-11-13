@@ -1,0 +1,57 @@
+.material-container {
+  padding: 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.material-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex;
+  width: 30%;
+  height: 250px;
+  background: var(--glass);
+  border-radius: var(--radius);
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.material-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.material-card p {
+  color: var(--muted);
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.material-card p span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.material-card a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: var(--accent);
+  color: var(--card);
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.material-card a:hover {
+  background: var(--accent-2);
+}
